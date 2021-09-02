@@ -23,6 +23,7 @@ public class LoginViewModel extends ViewModel {
     public MutableLiveData<String> password = new MutableLiveData<>();
     public MutableLiveData<String> userNameError = new MutableLiveData<>();
     public MutableLiveData<String> passwordError = new MutableLiveData<>();
+    public MutableLiveData<Boolean> isProgressEnabled = new MutableLiveData<>(false);
 
     private final MutableLiveData<Object> launchForgotPassword = new MutableLiveData<>();
     public LiveData<Object> getLaunchForgotPassword() {
@@ -70,9 +71,11 @@ public class LoginViewModel extends ViewModel {
 
         LoginRequest request = new LoginRequest(mobile, email, password.getValue().trim());
 
+        isProgressEnabled.setValue(true);
         mClient.getApi().userLogin(request).enqueue(new Callback<ApiResponse<LoginData>>() {
             @Override
             public void onResponse(Call<ApiResponse<LoginData>> call, Response<ApiResponse<LoginData>> response) {
+                isProgressEnabled.setValue(false);
                 if(response.isSuccessful() && response.body().getData() != null) {
                     LoginData data = response.body().getData();
                     if(data.isAuthenticate()) {
@@ -92,6 +95,7 @@ public class LoginViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<ApiResponse<LoginData>> call, Throwable throwable) {
+                isProgressEnabled.setValue(false);
                 Log.e("Login Error", throwable.getLocalizedMessage());
             }
         });

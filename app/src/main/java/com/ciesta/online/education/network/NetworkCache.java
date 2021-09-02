@@ -1,5 +1,6 @@
 package com.ciesta.online.education.network;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import java.io.File;
@@ -8,7 +9,8 @@ import okhttp3.Cache;
 
 public class NetworkCache {
 
-    private static NetworkCache INSTANCE;
+    @SuppressLint("StaticFieldLeak")
+    private static volatile NetworkCache INSTANCE;
     private final Context mContext;
 
     private NetworkCache(Context context) {

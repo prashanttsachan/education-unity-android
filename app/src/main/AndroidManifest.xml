@@ -14,16 +14,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlineEducation">
+        <activity android:name=".screens.forgot.ForgetActivity"></activity>
+        <activity android:name=".screens.commit.CommentActivity" />
+        <activity android:name=".screens.contact.AboutUsActivity" />
+        <activity android:name=".screens.contact.ContactUsActivity" />
+        <activity android:name=".screens.story.StoryUploadActivity" />
+        <activity android:name=".screens.story.StoryActivity" />
+        <activity android:name=".screens.mcq.McqQuestionActivity" />
+        <activity android:name=".screens.mcq.McqActivity" />
         <activity
             android:name=".screens.home.HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/Theme.OnlineEducation.NoActionbar"/>
+            android:theme="@style/Theme.OnlineEducation.NoActionbar" />
         <activity
             android:name=".screens.register.CreateUserActivity"
             android:theme="@style/Theme.OnlineEducation.NoActionbar" />
         <activity
             android:name=".screens.login.LoginActivity"
             android:theme="@style/Theme.OnlineEducation.NoActionbar" />
+        <activity android:name=".screens.donation.DonationActivity" />
+        <activity android:name=".screens.education.EducationActivity" />
         <activity
             android:name=".screens.SplashActivity"
             android:theme="@style/Theme.OnlineEducation.NoActionbar">

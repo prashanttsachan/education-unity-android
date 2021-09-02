@@ -39,11 +39,39 @@ public class CiestaPreference {
         return sPreferences.getString(AUTH_TOKEN, null);
     }
 
+    public void setUserName(String name){
+        sPreferences.edit().putString(USER_NAME, name).apply();
+    }
+
+    public String getUserName(){
+        return sPreferences.getString(USER_NAME, null);
+    }
+
+    public void setUserEmail(String email){
+        sPreferences.edit().putString(USER_EMAIL, email).apply();
+    }
+
+    public String getUserEmail(){
+        return sPreferences.getString(USER_EMAIL, null);
+    }
+
+    public void setUserMobileNo(String mobileNo){
+        sPreferences.edit().putString(USER_MOBILE_NO, mobileNo).apply();
+    }
+
+    public String getUserMobileNo(){
+        return sPreferences.getString(USER_MOBILE_NO, null);
+    }
+
     public void setUserAuthentication(boolean authenticate) {
         sPreferences.edit().putBoolean(USER_AUTHENTICATION, authenticate).apply();
     }
 
     public boolean isUserAuthentication() {
         return sPreferences.getBoolean(USER_AUTHENTICATION, false);
+    }
+
+    public void clearPreference() {
+        sPreferences.edit().clear().apply();
     }
 }
