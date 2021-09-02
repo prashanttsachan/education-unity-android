@@ -1,6 +1,7 @@
 package com.ciesta.online.education.network;
 
 import com.ciesta.online.education.model.request.CreateUserRequest;
+import com.ciesta.online.education.model.request.HomeRequest;
 import com.ciesta.online.education.model.request.LoginRequest;
 import com.ciesta.online.education.model.response.ApiResponse;
 import com.ciesta.online.education.model.response.LoginData;
@@ -17,5 +18,8 @@ public interface ApiInterface {
 
     @POST("/user/create")
     Call<ApiResponse<LoginData>> userCreate(@Body CreateUserRequest request);
+
+    @POST("/social-work/create")
+    Call<ApiResponse<LoginData>> userHome(@Body HomeRequest request);
 
 }

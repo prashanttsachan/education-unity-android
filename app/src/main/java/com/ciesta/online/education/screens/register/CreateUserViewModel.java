@@ -27,6 +27,7 @@ public class CreateUserViewModel extends ViewModel {
     public MutableLiveData<String> mobileNoError = new MutableLiveData<>();
     public MutableLiveData<String> passwordError = new MutableLiveData<>();
     public MutableLiveData<String> professionError = new MutableLiveData<>();
+    public MutableLiveData<Boolean> isProgressEnabled = new MutableLiveData<>(false);
 
     private final MutableLiveData<Object> launchLoginActivity = new MutableLiveData<>();
     public LiveData<Object> getLaunchLoginActivity() {
@@ -88,15 +89,19 @@ public class CreateUserViewModel extends ViewModel {
                 profession.getValue().trim()
         );
 
+        isProgressEnabled.setValue(true);
         mClient.getApi().userCreate(request).enqueue(new Callback<ApiResponse<LoginData>>() {
             @Override
             public void onResponse(Call<ApiResponse<LoginData>> call, Response<ApiResponse<LoginData>> response) {
+                isProgressEnabled.setValue(false);
                 if(response.isSuccessful() && response.body().getData() != null) {
                     LoginData data = response.body().getData();
                     if(data.isAuthenticate()) {
                         CiestaPreference.getInstance().setAuthToken(data.getAccessToken());
                         CiestaPreference.getInstance().setUserAuthentication(data.isAuthenticate());
-
+                        CiestaPreference.getInstance().setUserName(data.getUser().getName());
+                        CiestaPreference.getInstance().setUserEmail(data.getUser().getEmail());
+                        CiestaPreference.getInstance().setUserMobileNo(data.getUser().getMobile());
                         launchHomepage.setValue(new Object());
                     } else {
                         // Show error
@@ -110,7 +115,7 @@ public class CreateUserViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<ApiResponse<LoginData>> call, Throwable throwable) {
-
+                isProgressEnabled.setValue(false);
             }
         });
 
